@@ -13,6 +13,7 @@ print(response.headers)
 print("-------------------------------------------------------------------------")
 
 response1 = requests.post("https://playground.learnqa.ru/api/get_auth_cookie", data=payload)
+print(response1.cookies)
 cookie_value = response1.cookies.get('auth_cookie')
 print(cookie_value)
 
