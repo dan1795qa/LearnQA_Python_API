@@ -42,7 +42,11 @@ exclude_params = [
         ("Mozilla/5.0 (iPad; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1")
     ]
 
-expected_value = [
+@pytest.mark.parametrize('value', exclude_params)
+# @pytest.mark.parametrize('expected_value', expected_value)
+def test_ex13(value):
+
+    expected_value = [
         {'platform': 'Mobile', 'browser': 'No', 'device': 'Android'},
         {'platform': 'Mobile', 'browser': 'Chrome', 'device': 'iOS'},
         {'platform': 'Googlebot', 'browser': 'Unknown', 'device': 'Unknown'},
@@ -50,11 +54,23 @@ expected_value = [
         {'platform': 'Mobile', 'browser': 'No', 'device': 'iPhone'}
     ]
 
-@pytest.mark.parametrize('value', exclude_params)
-@pytest.mark.parametrize('expected_value', expected_value)
-
-def test_ex13(value, expected_value):
-
     headers = {"User-Agent": value}
     response13 = requests.get("https://playground.learnqa.ru/ajax/api/user_agent_check", headers=headers)
-    print(response13.text)
+    response13_json = response13.json()
+    print(response13_json)
+
+    response13_platform = response13_json.get('platform')
+    print(response13_platform)
+    assert response13_platform == expected_value[0].get('platform'), f"Expected value not equal 'platform'"
+
+    response13_browser = response13_json.get('browser')
+    print(response13_browser)
+    assert response13_browser == expected_value[0].get('browser'), f"Expected value not equal 'browser'"
+
+    response13_device = response13_json.get('device')
+    print(response13_device)
+    assert response13_device == expected_value[0].get('device'), f"Expected value not equal 'device'"
+
+    expected_value = expected_value.pop(0)
+
+    print('-'*50)
