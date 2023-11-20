@@ -60,17 +60,15 @@ def test_ex13(value):
     print(response13_json)
 
     response13_platform = response13_json.get('platform')
-    print(response13_platform)
-    assert response13_platform == expected_value[0].get('platform'), f"Expected value not equal 'platform'"
+    assert response13_platform == expected_value[0].get('platform'), f"Parameter 'platform': {response13_platform} - wrong!!! Expected value is '{expected_value[0].get('platform')}'"
 
     response13_browser = response13_json.get('browser')
-    print(response13_browser)
-    assert response13_browser == expected_value[0].get('browser'), f"Expected value not equal 'browser'"
+    assert response13_browser == expected_value[0].get('browser'), f"Parameter 'browser': {response13_browser} - wrong!!! Expected value is '{expected_value[0].get('browser')}'"
 
     response13_device = response13_json.get('device')
-    print(response13_device)
-    assert response13_device == expected_value[0].get('device'), f"Expected value not equal 'device'"
+    assert response13_device == expected_value[0].get('device'), f"Parameter 'device': {response13_device} - wrong!!! Expected value is '{expected_value[0].get('device')}'"
 
+    print('-' * 50)
     expected_value = expected_value.pop(0)
 
-    print('-'*50)
+
