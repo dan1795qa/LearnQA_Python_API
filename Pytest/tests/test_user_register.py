@@ -1,11 +1,31 @@
+from datetime import datetime
+
 import requests
 from Pytest.lib.base_case import BaseCase
 from Pytest.lib.assertions import Assertions
 
-
 class TestUserRegister(BaseCase):
+    def setup(self):
+        base_part = "learnqa"
+        domain = "example.com"
+        random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+        self.email = f"{base_part}{random_part}@{domain}"
+    def test_create_user_successfuly(self):
 
-    def test_create_user_with_exisiting_email(self):
+        data = {
+            'password': '123',
+            'username': "learnqa",
+            'firstName': "learnqa",
+            'lastName': "learnqa",
+            'email': self.email
+        }
+
+        response = requests.post("https://playground.learnqa.ru/api/user/", data=data)
+        Assertions.assert_code_status(response, 200)
+        Assertions.assert_json_has_key(response, "id")
+        print("-" * 50)
+
+    def test_create_user_with_existing_email(self):
 
         email = 'vinkotov@example.com'
         data = {
@@ -17,11 +37,13 @@ class TestUserRegister(BaseCase):
         }
 
         response = requests.post("https://playground.learnqa.ru/api/user/", data=data)
-
-        # print('\n')
+        print('\n')
         # print(response.status_code)
         # print(response.content)
+        Assertions.assert_code_status(response, 400)
+        assert response.content.decode("utf-8") == f"Users with email '{email}' already exists", \
+            f"Unexpected response content {response.content}"           #если выводит символ 'b' то нужно втсавить кодировку!!!
 
-        assert response.status_code == 400, f"Unexpected status code {response.status_code}"
-        assert response.content.decode("utf-8") == f"Users with email '{email}' already exists", f"Unexpected response content {response.content}"
+
+
 

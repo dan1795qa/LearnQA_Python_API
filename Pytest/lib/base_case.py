@@ -1,5 +1,4 @@
 import json.decoder
-
 from requests import Response
 
 class BaseCase:
