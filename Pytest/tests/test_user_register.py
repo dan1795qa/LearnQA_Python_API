@@ -1,10 +1,13 @@
 from datetime import datetime
+import allure
 from Pytest.lib.my_requests import MyRequests
 import requests
 from Pytest.lib.base_case import BaseCase
 from Pytest.lib.assertions import Assertions
 
+@allure.epic("Registration cases")
 class TestUserRegister(BaseCase):
+    @allure.description("This test successfuly created user")
     def test_create_user_successfuly(self):
         data = self.prepare_registration_data()
 
@@ -12,6 +15,7 @@ class TestUserRegister(BaseCase):
         Assertions.assert_code_status(response, 200)
         Assertions.assert_json_has_key(response, "id")
 
+    @allure.description("This test created user with existing email")
     def test_create_user_with_existing_email(self):
 
         email = 'vinkotov@example.com'
