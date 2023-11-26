@@ -1,10 +1,14 @@
+import allure
+
 from Pytest.lib.my_requests import MyRequests
 from Pytest.lib.base_case import BaseCase
 from Pytest.lib.assertions import Assertions
 
 
+@allure.epic("All path with new user(register, login, edit, get)")
 class TestUserEdit(BaseCase):
 
+    @allure.description("This test edit user")
     def test_edit_just_created_user(self):
 
         """"REGISTER"""""
