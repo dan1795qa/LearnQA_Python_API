@@ -1,13 +1,18 @@
 from datetime import datetime
+
+import allure
+
 from Pytest.lib.my_requests import MyRequests
 import requests
 from Pytest.lib.base_case import BaseCase
 from Pytest.lib.assertions import Assertions
 
 
+@allure.epic("Auth/no auth cases")
 class TestUserGet(BaseCase):
 
     """"Тест для неавторизрванного пользователя"""""
+    @allure.description("This test no auth user")
     def test_get_user_details_not_auth(self):
 
         response = MyRequests.get("/user/2")
@@ -18,6 +23,7 @@ class TestUserGet(BaseCase):
 
 
     """"Тест для авторизрванного пользователя"""
+    @allure.description("This test auth user")
     def test_get_user_details_auth_as_same_user(self):
 
         data = {
