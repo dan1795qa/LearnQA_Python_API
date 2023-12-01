@@ -1,8 +1,8 @@
 import pytest
 import requests
-from Pytest.lib.base_case import BaseCase
-from Pytest.lib.assertions import Assertions
-from Pytest.lib.my_requests import MyRequests
+from Project.lib.base_case import BaseCase
+from Project.lib.assertions import Assertions
+from Project.lib.my_requests import MyRequests
 import allure
 
 

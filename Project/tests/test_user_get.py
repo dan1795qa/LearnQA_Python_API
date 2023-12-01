@@ -2,10 +2,10 @@ from datetime import datetime
 
 import allure
 
-from Pytest.lib.my_requests import MyRequests
+from Project.lib.my_requests import MyRequests
 import requests
-from Pytest.lib.base_case import BaseCase
-from Pytest.lib.assertions import Assertions
+from Project.lib.base_case import BaseCase
+from Project.lib.assertions import Assertions
 
 
 @allure.epic("Auth/no auth cases")

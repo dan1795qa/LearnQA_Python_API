@@ -1,7 +1,7 @@
-from Pytest.lib.logger import Logger
+from Project.lib.logger import Logger
 import allure
 import requests
-from Pytest.environment import ENV_OBJECT
+from Project.environment import ENV_OBJECT
 
 
 class MyRequests():
@@ -33,7 +33,7 @@ class MyRequests():
     def _send(url: str, data: dict, headers: dict, cookies: dict, method: str):
 
         url = f"https://playground.learnqa.ru/api{url}"
-        url = f"{ENV_OBJECT.get_base_url()}{url}"
+        # url = f"{ENV_OBJECT.get_base_url()}{url}"
 
 
         if headers is None:
