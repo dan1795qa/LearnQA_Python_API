@@ -1,9 +1,11 @@
 import json.decoder
+import random
+import string
 from datetime import datetime
 
 from requests import Response
 
-class BaseCase:
+class BaseCase():
     def get_cookie(self, response: Response, cookie_name):
         assert cookie_name in response.cookies, f"Cannot find cookie with name {cookie_name} in the last response"
         return response.cookies[cookie_name]
@@ -36,3 +38,8 @@ class BaseCase:
             'lastName': "learnqa",
             'email': email
         }
+
+    def generate_string(self, length):
+        all_symbols = string.ascii_uppercase + string.digits
+        result = ''.join(random.choice(all_symbols) for _ in range(length))
+        return result
